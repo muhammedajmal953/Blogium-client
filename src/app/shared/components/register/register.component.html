@@ -1,0 +1,116 @@
+<div>
+  <div class="mb-[32px] text-center flex flex-col items-center">
+    <h2 class="font-semibold text-[39px] tracking-[-2%]">Welcome to our community!</h2>
+    <p class="text-[#96A0AD] max-w-[373px] break-words text-center text-[14px]">
+      We're so excited to have you join us. Please sign up below to start your journey with us.
+    </p>
+  </div>
+
+  <div>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit();">
+      <div class="flex flex-col items-center">
+        <div class="w-[300px]">
+
+          <!-- Username Field -->
+          <div class="mb-[24px]">
+            <label for="userName">
+              <p class="font-medium text-[14px]"
+                 [class.error]="registerForm.get('userName')?.errors && registerForm.get('userName')!.touched">
+                Username
+              </p>
+            </label>
+            <div class="relative mt-[8px]">
+              <input formControlName="userName" id="userName" type="text" placeholder="Enter your username"
+                     class="placeholder:text-[#96A0AD] placeholder:text-[16px] py-[12px] pl-[18px] border border-solid border-[#BDC4CD] rounded-[12px] outline-none w-full"
+                     [class.error]="registerForm.get('userName')?.errors && registerForm.get('userName')!.touched">
+            </div>
+            <p *ngIf="registerForm.get('userName')?.hasError('required') && registerForm.get('userName')!.touched"
+               class="text-[13px] text-[#FF6B6B] absolute -bottom-[23px]">This Field is required.</p>
+            <p *ngIf="registerForm.get('userName')?.errors?.['message'] && registerForm.get('userName')!.touched"
+               class="text-[13px] text-[#FF6B6B] absolute -bottom-[23px]">{{ registerForm.get('userName')?.errors?.['message'] }}</p>
+          </div>
+
+          <!-- Email Field -->
+          <div class="mb-[24px]">
+            <label for="email">
+              <p class="font-medium text-[14px]"
+                 [class.error]="registerForm.get('email')?.errors && registerForm.get('email')!.touched">
+                Email
+              </p>
+            </label>
+            <div class="relative mt-[8px]">
+              <input formControlName="email" id="email" type="text" placeholder="Enter your email"
+                     class="placeholder:text-[#96A0AD] placeholder:text-[16px] py-[12px] pl-[18px] border border-solid border-[#BDC4CD] rounded-[12px] outline-none w-full"
+                     [class.error]="registerForm.get('email')?.errors && registerForm.get('email')!.touched">
+            </div>
+            <p *ngIf="registerForm.get('email')?.hasError('required') && registerForm.get('email')!.touched"
+               class="text-[13px] text-[#FF6B6B] absolute -bottom-[23px]">This Field is required.</p>
+            <p *ngIf="registerForm.get('email')?.hasError('pattern') && registerForm.get('email')!.touched"
+               class="text-[13px] text-[#FF6B6B] absolute -bottom-[23px]">Enter Valid Email.</p>
+          </div>
+
+          <!-- Password Field -->
+          <div class="mb-[24px]">
+            <label for="password">
+              <p class="font-medium text-[14px]"
+                 [class.error]="registerForm.get('password')?.errors && registerForm.get('password')!.touched">
+                Password
+              </p>
+            </label>
+            <div class="relative mt-[8px]">
+              <input formControlName="password" id="password" type="password" placeholder="Enter your password"
+                     class="placeholder:text-[#96A0AD] placeholder:text-[16px] py-[12px] pl-[18px] border border-solid border-[#BDC4CD] rounded-[12px] outline-none w-full"
+                     [class.error]="registerForm.get('password')?.errors && registerForm.get('password')!.touched">
+            </div>
+            <p *ngIf="registerForm.get('password')?.hasError('required') && registerForm.get('password')!.touched"
+               class="text-[13px] text-[#FF6B6B] absolute -bottom-[23px]">This Field is required.</p>
+            <p *ngIf="registerForm.get('password')?.hasError('pattern') && registerForm.get('password')!.touched"
+               class="text-[13px] text-[#FF6B6B] absolute -bottom-[23px]">Password must have at least 8 characters, including one character, one number, and one special character.</p>
+          </div>
+
+          <!-- Confirm Password Field -->
+          <div>
+            <label for="confirmPassword">
+              <p class="font-medium text-[14px]"
+                 [class.error]="registerForm.get('confirmPassword')?.errors && registerForm.get('confirmPassword')!.touched">
+                Confirm Password
+              </p>
+            </label>
+            <div class="relative mt-[8px]">
+              <input formControlName="confirmPassword" id="confirmPassword" type="password"
+                     placeholder="Enter your confirm password"
+                     class="placeholder:text-[#96A0AD] placeholder:text-[16px] py-[12px] pl-[18px] border border-solid border-[#BDC4CD] rounded-[12px] outline-none w-full"
+                     [class.error]="registerForm.get('confirmPassword')?.errors && registerForm.get('confirmPassword')!.touched">
+            </div>
+            <p *ngIf="registerForm.get('confirmPassword')?.hasError('required') && registerForm.get('confirmPassword')!.touched"
+               class="text-[13px] text-[#FF6B6B] absolute -bottom-[23px]">This Field is required.</p>
+          </div>
+
+          <!-- Submit Button -->
+          <div>
+            <button type="submit" class="py-[14px] mt-9 bg-black text-white font-bold text-[16px] rounded-[16px] text-center w-full">
+              <div *ngIf="isLogging === false">Sign up</div>
+              <div *ngIf="isLogging === true">
+                <div role="status">
+                  <svg aria-hidden="true" class="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+                       viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor" />
+                    <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill" />
+                  </svg>
+                  <span class="sr-only">Loading...</span>
+                </div>
+              </div>
+            </button>
+          </div>
+        </div>
+
+        <!-- Redirect to Login -->
+        <div class="mt-10">
+          <p class="text-[14px] font-medium">
+            Don't have an account yet? <span routerLink="/auth/login" class="font-semibold cursor-pointer text-[#3213AE]">Sign in</span> now to join our community
+          </p>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

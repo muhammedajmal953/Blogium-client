@@ -1,0 +1,18 @@
+<div class="py-10 px-96">
+  <div class="mb-4">
+      <p class="rounded-[6px] bg-[#4B6BFB] py-[6px] px-[12px] text-sm font-medium w-fit text-white">New</p>
+  </div>
+  <div class="mb-5">
+      <h2 class="text-[#181A2A] font-semibold text-3xl break-words">{{ blogData?.heading }}</h2>
+  </div>
+  <div class="flex gap-[24px] items-center text-[#696A75] text-sm font-medium mb-8">
+      <p>{{ blogData?.userData[0]?.username }}</p>
+      <p>{{ blogData.createdAt | date }}</p>
+  </div>
+  <div class="w-full mb-8">
+      <img class="w-full h-screen rounded-[10px]" [src]="blogData?.image" alt="">
+  </div>
+  <div class="text-lg font-normal text-[#3B3C4A]">
+      <p class="break-words">{{ blogData?.content }}</p>
+  </div>
+</div>

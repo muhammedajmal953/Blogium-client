@@ -1,0 +1,88 @@
+<div class="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
+  <div class="relative py-3 sm:max-w-xl sm:mx-auto w-full">
+    <div
+      class="absolute inset-0 bg-gradient-to-r from-cyan-400 to-sky-500 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl">
+    </div>
+    <div class="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20">
+      <div class="max-w-md mx-auto">
+        <div>
+          <h1 class="text-2xl font-semibold text-center sm:text-left">Add Content</h1>
+        </div>
+        <div class="divide-y divide-gray-200">
+          <form class="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7" [formGroup]="formData"
+            (ngSubmit)="onSubmit()">
+            <!-- Heading Field -->
+            <div class="relative">
+              <input autocomplete="off" id="heading" formControlName="heading" type="text"
+                class="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:border-rose-600"
+                placeholder="Heading of the Article" />
+              <label for="heading"
+                class="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">
+                Heading of the Article
+              </label>
+              <p *ngIf="formData.get('heading')?.errors?.['required'] && formData.get('heading')?.touched"
+                class="text text-red-500">
+                Heading is required
+              </p>
+              <p *ngIf="formData.get('heading')?.errors?.['pattern'] && formData.get('heading')?.touched"
+                class="text text-red-500">
+                Heading must be at least 3 characters
+              </p>
+            </div>
+
+            <!-- Content Field -->
+            <div class="relative">
+              <textarea autocomplete="off" id="content" formControlName="content"
+                class="peer placeholder-transparent h-24 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:border-rose-600 resize-none"
+                placeholder="Content"></textarea>
+              <label for="content"
+                class="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-6 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">
+                Content
+              </label>
+              <p *ngIf="formData.get('content')?.errors?.['required'] && formData.get('content')?.touched"
+                class="text text-red-500">
+                Content is required
+              </p>
+              <p *ngIf="formData.get('content')?.errors?.['content'] && formData.get('content')?.touched"
+                class="text text-red-500">
+                Content must have at least 10 characters
+              </p>
+            </div>
+
+            <!-- File Field -->
+            <div class="relative">
+              <input autocomplete="off" id="file" formControlName="file" type="file"
+                (change)="onChange($event);$event.preventDefault()" class="peer hidden" />
+              <label for="file"
+                class="cursor-pointer w-full inline-block py-2 px-4 text-center bg-cyan-500 text-white rounded-md hover:bg-cyan-600 transition-colors focus:outline-none">
+                Choose an Image
+              </label>
+              <p *ngIf="formData.get('file')?.errors?.['required'] && formData.get('file')?.touched"
+                class="text text-red-500">
+                Image is required
+              </p>
+              <small *ngIf="formData.get('file')?.errors?.['fileType']" class="text-red-500">Invalid file type. Only
+                JPG, JPEG, PNG are
+                allowed.</small>
+              <small *ngIf="formData.get('file')?.errors?.['fileSize']">File size exceeds 2 MB.</small>
+            </div>
+
+
+            <!-- Submit Button -->
+            <div class="relative">
+              <button type="submit" class="bg-cyan-500 text-white rounded-md px-4 py-2 w-full sm:w-auto">
+                submit
+              </button>
+
+              <div *ngIf="adding"
+                class="animate-spin inline-block size-6 border-[3px] border-current border-t-transparent text-blue-600 rounded-full"
+                role="status" aria-label="loading">
+                <span class="sr-only">Loading...</span>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

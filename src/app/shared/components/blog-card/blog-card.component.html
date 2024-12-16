@@ -1,0 +1,37 @@
+<div class="container mx-auto px-4 py-8">
+  <div class="flex flex-wrap justify-center gap-6">
+    <div *ngFor="let blog of blogs"
+      class="max-w-sm w-full bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105">
+      <!-- Image Section -->
+      <div *ngIf="blog.image">
+        <img class="w-full h-48 object-cover" [src]="blog.image" alt="Blog image" />
+      </div>
+
+      <!-- Content Section -->
+      <div class="p-6">
+        <!-- Tag -->
+        <div class="text-blue-600 bg-blue-100 text-xs uppercase font-semibold rounded-full inline-block px-3 py-1 mb-3">
+          New
+        </div>
+
+        <!-- Heading -->
+        <h2 class="text-xl font-bold text-gray-800 mb-2 hover:text-blue-600 transition duration-200">
+          {{ blog.heading }}
+        </h2>
+
+        <!-- Metadata -->
+        <div class="text-sm text-gray-500 flex items-center justify-between mb-4">
+          <p class="font-medium">{{ blog?.userData[0]?.username }}</p>
+          <p>{{ blog.createdAt | date }}</p>
+        </div>
+
+        <!-- Read More -->
+        <div class="mt-4">
+          <a routerLink="/{{blog._id}}"  class="text-blue-600 hover:underline text-sm font-semibold">
+            Read More &rarr;
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
